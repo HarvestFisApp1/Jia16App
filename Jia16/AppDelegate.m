@@ -154,19 +154,23 @@
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-//    NSString *userId=[[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
-//    NSString *gesId=[NSString stringWithFormat:@"gestureId%@",userId];
-//    
-//    NSString *gestureValue=[[NSUserDefaults standardUserDefaults]objectForKey:gesId];
-//
-//    if([gestureValue isEqualToString:@"1"])
-//    {
-//        NSDictionary *dict =[[NSDictionary alloc] initWithObjectsAndKeys:@"verify",@"opType",@"手势密码登录",@"title", nil];
-//        
-//        [[NSNotificationCenter defaultCenter]postNotificationName:@"openGesture" object:nil userInfo:dict];
-//
-//    }
+
+
+}
+
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+   
+    NSString *str=url.absoluteString;
+    NSArray *array = [str componentsSeparatedByString:@"jia16://"];
+    NSString *paramStr=array[1];
+    
+    NSString *linkUrl=[NSString stringWithFormat:@"%@%@",BaseH5,paramStr];
+    self.linkUrl=linkUrl;
+    NSDictionary *dict =[[NSDictionary alloc] initWithObjectsAndKeys:linkUrl,@"url",@"1",@"isAwake",nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"reloadUrl" object:nil userInfo:dict];
+     [[NSNotificationCenter defaultCenter]postNotificationName:@"closeLogin" object:nil userInfo:nil];
+    return YES;
 
 }
 

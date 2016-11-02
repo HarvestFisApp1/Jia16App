@@ -412,6 +412,7 @@
 
 
 
+
 -(void)clickForgetPasswd:(PwdCommonView *)view
 {
 

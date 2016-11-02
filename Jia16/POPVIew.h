@@ -22,7 +22,7 @@
 @property  (nonatomic,assign) id<popViewDelegate>  delegate;
 
 -(void)show;
-
+-(void)closeView;
 -(instancetype)initWithText:(NSString *)title Message:(NSString *)message leftButton:(NSString*)leftBtn rightBtn:(NSString *)rightBtn;
 
 

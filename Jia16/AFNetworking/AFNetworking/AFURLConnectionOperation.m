@@ -614,6 +614,37 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
             [[challenge sender] continueWithoutCredentialForAuthenticationChallenge:challenge];
         }
     }
+//    NSString *thePath = [[NSBundle mainBundle] pathForResource:@"jia16" ofType:@"p12"];
+//    
+//    NSLog(@"thePath===========%@",thePath);
+//    
+//    NSData *PKCS12Data = [[NSData alloc] initWithContentsOfFile:thePath];
+//    
+//    CFDataRef inPKCS12Data = (__bridge CFDataRef)PKCS12Data;
+//    
+//    SecIdentityRef identity = NULL;
+//    
+//    // extract the ideneity from the certificate
+//    
+//    [self extractIdentity :inPKCS12Data :&identity];
+//    
+//    SecCertificateRef certificate = NULL;
+//    
+//    SecIdentityCopyCertificate (identity, &certificate);
+//    
+//    const void *certs[] = {certificate};
+//    
+//    // CFArrayRef certArray = CFArrayCreate(kCFAllocatorDefault, certs, 1, NULL);
+//    
+//    // create a credential from the certificate and ideneity, then reply to the challenge with the credential
+//    
+//    //NSLog(@"identity=========%@",identity);
+//    
+//    NSURLCredential *credential = [NSURLCredential credentialWithIdentity:identity certificates:nil persistence:NSURLCredentialPersistencePermanent];
+//    
+//    // credential = [NSURLCredential credentialWithIdentity:identity certificates:(__bridge NSArray*)certArray persistence:NSURLCredentialPersistencePermanent];
+//    
+//    [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
 }
 
 - (BOOL)connectionShouldUseCredentialStorage:(NSURLConnection __unused *)connection {
@@ -789,4 +820,45 @@ didReceiveResponse:(NSURLResponse *)response
     return operation;
 }
 
+
+
+- (OSStatus)extractIdentity:(CFDataRef)inP12Data :(SecIdentityRef*)identity {
+    
+    OSStatus securityError = errSecSuccess;
+    
+    CFStringRef password = CFSTR("clic1234");
+    
+    const void *keys[] = { kSecImportExportPassphrase };
+    
+    const void *values[] = { password };
+    
+    CFDictionaryRef options = CFDictionaryCreate(NULL, keys, values, 1, NULL, NULL);
+    
+    CFArrayRef items = CFArrayCreate(NULL, 0, 0, NULL);
+    
+    securityError = SecPKCS12Import(inP12Data, options, &items);
+    
+    if (securityError == 0)
+        
+    {
+        
+        CFDictionaryRef ident = CFArrayGetValueAtIndex(items,0);
+        
+        const void *tempIdentity = NULL;
+        
+        tempIdentity = CFDictionaryGetValue(ident, kSecImportItemIdentity);
+        
+        *identity = (SecIdentityRef)tempIdentity;
+        
+    }
+    
+    if (options) {
+        
+        CFRelease(options);
+        
+    }
+    
+    return securityError;
+    
+}
 @end

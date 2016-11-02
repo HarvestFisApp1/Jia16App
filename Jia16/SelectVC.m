@@ -23,7 +23,10 @@
 #import "CookieHandler.h"
 
 #import <ImageIO/ImageIO.h>
-@interface SelectVC ()<UIWebViewDelegate,UIGestureRecognizerDelegate>
+
+#import "UIImage+GIF.h"
+#import "AppDelegate.h"
+@interface SelectVC ()<UIWebViewDelegate,UIGestureRecognizerDelegate,NSURLConnectionDelegate>
 {
 
 
@@ -32,10 +35,15 @@
     NSHTTPCookie  *csrfCookie;
     NSHTTPCookie  *p2pCookie;
     UITapGestureRecognizer *tap;
+    NSNotification *memNoti;
     
     BOOL isOnline;
     
     BOOL isLoading;
+    
+    
+    
+    NSString *linkUrl;
 }
 
 @property (nonatomic,strong)   UIImageView  *frontView;
@@ -47,35 +55,35 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+
     self.webView.delegate=self;
     self.webView.scrollView.scrollEnabled=NO;
     isOnline=YES;
 
     static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        NSURL *fileUrl = [[NSBundle mainBundle] URLForResource:@"loading" withExtension:@"gif"];//加载GIF图片
-        CGImageSourceRef gifSource = CGImageSourceCreateWithURL((CFURLRef)fileUrl, NULL);//将GIF图片转换成对应的图片源
-        size_t frameCout=CGImageSourceGetCount(gifSource);//获取其中图片源个数，即由多少帧图片组成
-        NSMutableArray* frames=[[NSMutableArray alloc] init];//定义数组存储拆分出来的图片
-        for (size_t i=0; i<frameCout;i++)
-        {
+    
+    @autoreleasepool {
+        dispatch_once(&onceToken, ^{
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"loading" ofType:@"gif"];
+            NSData *data = [NSData dataWithContentsOfFile:path];
+            UIImage *image = [UIImage sd_animatedGIFWithData:data];
+//            UIImage *animatedImage = [UIImage animatedImageWithImages:image.images duration:3];
             
-            CGImageRef imageRef=CGImageSourceCreateImageAtIndex(gifSource, i, NULL);//从GIF图片中取出源图片
-            UIImage* imageName=[UIImage imageWithCGImage:imageRef];//将图片源转换成UIimageView能使用的图片源
-            [frames addObject:imageName];//将图片加入数组中
-            CGImageRelease(imageRef);
-        }
-        
-        
-        _frontView=[[UIImageView alloc] initWithFrame:self.view.bounds];
-        _frontView.animationImages=frames;//将图片数组加入UIImageView动画数组中
-        _frontView.backgroundColor=[UIColor whiteColor];
-        _frontView.animationDuration=3;//每次动画时长
-        [_frontView startAnimating];//开启动画，此处没有调用播放次数接口，UIImageView默认播放次数为无限次，故这里不做处理
-        
-        
-    });
+            
+            _frontView=[[UIImageView alloc] initWithFrame:self.view.bounds];
+            _frontView.animationImages=image.images;//将图片数组加入UIImageView动画数组中
+            data=nil;
+            image=nil;
+            
+            _frontView.backgroundColor=[UIColor whiteColor];
+            _frontView.animationDuration=3;//每次动画时长
+            [_frontView startAnimating];//开启动画，此处没有调用播放次数接口，UIImageView默认播放次数为无限次，故这里不做处理
+            
+            
+        });
 
+    }
+  
     
     NSString *gestureID=[[NSUserDefaults standardUserDefaults]objectForKey:@"userId"];
     NSString *gesId=[NSString stringWithFormat:@"gestureId%@",gestureID];
@@ -103,7 +111,10 @@
     }
 
     [self requestCurrent];
-    [self reloadUrl:nil];
+    
+    
+    
+    [self reloadUrl:memNoti];
 
 }
 
@@ -116,6 +127,8 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    
+
  [self.navigationController setNavigationBarHidden:YES];
  
 
@@ -126,6 +139,7 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [_frontView removeFromSuperview];
+    _frontView=nil;
     isLoading=NO;
 
 }
@@ -196,12 +210,12 @@
     
     
     if ([requestStr hasSuffix:@"LoadSuccess"]&&isLoading) {
-      
+        [_frontView stopAnimating];
         [_frontView removeFromSuperview];
+        _frontView=nil;
+     
         isLoading=NO;
     }
-    
-    
     
     
     if([requestStr rangeOfString:@"AutoLogin"].location!=NSNotFound)//H5自动登录
@@ -313,6 +327,8 @@
     }
 
     
+    
+    
    if([requestStr hasSuffix:@"LoginVC"])//登录
     {
         NSArray *array = [requestStr componentsSeparatedByString:@"?"];
@@ -350,6 +366,7 @@
     return YES;
     
 }
+
 
 
 
@@ -400,6 +417,15 @@
 {
     
     NSString *urlStr=noti.userInfo[@"url"];
+    AppDelegate * appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    linkUrl=appDelegate.linkUrl;
+
+    if(linkUrl.length>0)
+    {
+    
+        urlStr=linkUrl;
+    }
+ 
     
     if (urlStr.length>0) {
         refUrl=[NSURL URLWithString:urlStr];
@@ -437,6 +463,7 @@
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     
                     [_frontView removeFromSuperview];
+                    _frontView=nil;
                     isLoading=NO;
                 });
             }
@@ -456,13 +483,26 @@
     NSDictionary*dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios/1.0", @"UserAgent", nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
   
+    
    [self.webView loadRequest:[NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:15]];
+    [NSURLConnection connectionWithRequest:[NSURLRequest requestWithURL:url] delegate:self];
+
      [self setCookie];
 
      [self listenNet];
 }
 
+-(BOOL)connection:(NSURLConnection*)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace*)protectionSpace {
+    return[protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+}
 
+-(void)connection:(NSURLConnection*)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge {
+    if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
+       
+            [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+    
+    [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+}
 -(void)setCookie
 {
     
@@ -684,6 +724,8 @@
                 break;
         }
     }];
+    
+    
     
     // 3.开始监控
     [mgr startMonitoring];

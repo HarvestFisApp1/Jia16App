@@ -20,6 +20,7 @@
     UITextField *textFieldName;
     UITextField *textFieldPwd;
     UIButton *LoginBtn;
+    POPVIew *popView;
 }
 @property(nonatomic,strong) UITableView *tableView;
 @end
@@ -31,7 +32,7 @@
     self.title=@"登录";
     [self.view addSubview:self.tableView];
     [self initNav];
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(close) name:@"closeLogin" object:nil];
 }
 
 -(void)initNav
@@ -110,6 +111,11 @@
 
 }
 
+-(void)close
+{
+
+      [self.navigationController popViewControllerAnimated:NO];
+}
 
 #pragma mark tableView Delegate
 
@@ -372,11 +378,16 @@
       
             
             if(![[NSUserDefaults standardUserDefaults] boolForKey:firstLoginId]&&([gestureValue isEqualToString:@"0"]||!gestureValue)){
+
+                if(!popView)
+                {
+                    popView = [[POPVIew alloc] initWithText:nil Message:@"" leftButton:nil rightBtn:@""];
+                    popView.delegate=self;
+                    [popView show];
+         
+                }
                 
-                
-                POPVIew *popView = [[POPVIew alloc] initWithText:nil Message:@"" leftButton:nil rightBtn:@""];
-                popView.delegate=self;
-                [popView show];
+              
                 
             }
             else
@@ -424,7 +435,6 @@
     
     if (tableView!=self.tableView) {
         [self.navigationController popViewControllerAnimated:NO];
-        
         NSInteger row=[indexPath row];
         switch (row) {
             case 1:
@@ -494,7 +504,6 @@
    }
        
 
-    
     return YES;
 
 }
