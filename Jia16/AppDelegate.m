@@ -17,6 +17,8 @@
 #import "HttpAPI.h"
 
 #import "CXAlertView.h"
+
+#import "UMMobClick/MobClick.h"
 @interface AppDelegate ()
 {
 
@@ -34,7 +36,21 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
   
-
+    UMConfigInstance.appKey = @"583cf3484ad15622cf001f67";
+    UMConfigInstance.channelId = @"App Store";
+    [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
+    
+    Class cls = NSClassFromString(@"UMANUtil");
+    SEL deviceIDSelector = @selector(openUDIDString);
+    NSString *deviceID = nil;
+    if(cls && [cls respondsToSelector:deviceIDSelector]){
+        deviceID = [cls performSelector:deviceIDSelector];
+    }
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:@{@"oid" : deviceID}
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:nil];
+    
+    NSLog(@"%@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
     
     
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]){

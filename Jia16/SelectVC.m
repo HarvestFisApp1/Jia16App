@@ -619,6 +619,8 @@
 
 -(void)autoLogin
 {
+    
+
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
 
     NSData *data=[defaults objectForKey:@"userKey"];
@@ -626,6 +628,7 @@
     if(data.length>0)
     {
         NSDictionary *userkeyDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        
         
         [[HttpAPI SharedCommonApi]requestPostMethodUrl:HTTP_LOGIN withParas:userkeyDic   success:^(AFHTTPRequestOperation* operation, NSObject *resultObject) {
             
@@ -637,6 +640,7 @@
                 [defaults setObject: cookiesData forKey:kCookie];
                 
                 [self reloadUrl:nil];
+                
 //                [self.navigationController popViewControllerAnimated:NO];
              
             }
@@ -659,6 +663,7 @@
     }
    
 }
+
 
 
 #pragma mark 获取网络状态

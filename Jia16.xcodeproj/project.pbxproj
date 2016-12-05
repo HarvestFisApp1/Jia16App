@@ -60,6 +60,10 @@
 		3B2C45821DC1A74200EE7573 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C456E1DC1A74200EE7573 /* UIRefreshControl+AFNetworking.m */; };
 		3B2C45831DC1A74200EE7573 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C45701DC1A74200EE7573 /* UIWebView+AFNetworking.m */; };
 		3B705BCB1D504F0C00C1EC8A /* CommonTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B705BCA1D504F0C00C1EC8A /* CommonTool.m */; };
+		3B7644FD1DED2D2100139D6D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7644FC1DED2D2100139D6D /* CoreTelephony.framework */; };
+		3B7644FF1DED2D3000139D6D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7644FE1DED2D3000139D6D /* libz.tbd */; };
+		3B7645011DED2D4000139D6D /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7645001DED2D4000139D6D /* libsqlite3.tbd */; };
+		3B7645041DED4E6300139D6D /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7645031DED4E6300139D6D /* UMMobClick.framework */; };
 		3B7BA8301D911A8000D658E8 /* InvestDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7BA82F1D911A8000D658E8 /* InvestDetailVC.m */; };
 		3B82C6A51D66F0760080685F /* reload in Resources */ = {isa = PBXBuildFile; fileRef = 3B82C6A41D66F0760080685F /* reload */; };
 		3B8D2CF71D780054005BB5F2 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3B8D2CF61D780054005BB5F2 /* loading.gif */; };
@@ -229,6 +233,11 @@
 		3B2C45701DC1A74200EE7573 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		3B705BC91D504F0C00C1EC8A /* CommonTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonTool.h; sourceTree = "<group>"; };
 		3B705BCA1D504F0C00C1EC8A /* CommonTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonTool.m; sourceTree = "<group>"; };
+		3B7644FA1DED2D0A00139D6D /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMMobClick.framework; path = "../Downloads/umsdk_IOS_analyics_no-idfa_v4.1.5/UMMobClick.framework"; sourceTree = "<group>"; };
+		3B7644FC1DED2D2100139D6D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		3B7644FE1DED2D3000139D6D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		3B7645001DED2D4000139D6D /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		3B7645031DED4E6300139D6D /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMMobClick.framework; path = Jia16/UMMobClick.framework; sourceTree = "<group>"; };
 		3B7BA82E1D911A8000D658E8 /* InvestDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvestDetailVC.h; sourceTree = "<group>"; };
 		3B7BA82F1D911A8000D658E8 /* InvestDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvestDetailVC.m; sourceTree = "<group>"; };
 		3B82C6A41D66F0760080685F /* reload */ = {isa = PBXFileReference; lastKnownFileType = folder; path = reload; sourceTree = "<group>"; };
@@ -319,6 +328,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B7645041DED4E6300139D6D /* UMMobClick.framework in Frameworks */,
+				3B7645011DED2D4000139D6D /* libsqlite3.tbd in Frameworks */,
+				3B7644FF1DED2D3000139D6D /* libz.tbd in Frameworks */,
+				3B7644FD1DED2D2100139D6D /* CoreTelephony.framework in Frameworks */,
 				3BDBA4271D546D4600CAE278 /* Foundation.framework in Frameworks */,
 				3BD626A31D52E593004337B8 /* UIKit.framework in Frameworks */,
 			);
@@ -402,12 +415,11 @@
 		3B0D07621D4AF012002DCFC0 = {
 			isa = PBXGroup;
 			children = (
-				3BDBA4261D546D4600CAE278 /* Foundation.framework */,
-				3BD626A21D52E593004337B8 /* UIKit.framework */,
 				3B0D076D1D4AF012002DCFC0 /* Jia16 */,
 				3B0D078A1D4AF012002DCFC0 /* Jia16Tests */,
 				3B0D07951D4AF012002DCFC0 /* Jia16UITests */,
 				3B0D076C1D4AF012002DCFC0 /* Products */,
+				3B7644F91DED2D0900139D6D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -588,6 +600,20 @@
 				3BD819B01D51982D004DCB8B /* HttpAPI.m */,
 			);
 			name = Common;
+			sourceTree = "<group>";
+		};
+		3B7644F91DED2D0900139D6D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3B7645031DED4E6300139D6D /* UMMobClick.framework */,
+				3BD626A21D52E593004337B8 /* UIKit.framework */,
+				3BDBA4261D546D4600CAE278 /* Foundation.framework */,
+				3B7645001DED2D4000139D6D /* libsqlite3.tbd */,
+				3B7644FE1DED2D3000139D6D /* libz.tbd */,
+				3B7644FC1DED2D2100139D6D /* CoreTelephony.framework */,
+				3B7644FA1DED2D0A00139D6D /* UMMobClick.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		3B82C6A31D66F05F0080685F /* Resource */ = {
@@ -1077,6 +1103,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../",
+					"$(PROJECT_DIR)/Jia16",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = /Users/lixuehai/Jia16App/Jia16/PrefixHeader.pch;
 				INFOPLIST_FILE = Jia16/Info.plist;
@@ -1095,6 +1125,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../",
+					"$(PROJECT_DIR)/Jia16",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = /Users/lixuehai/Jia16App/Jia16/PrefixHeader.pch;
 				INFOPLIST_FILE = Jia16/Info.plist;

@@ -323,8 +323,11 @@
 }
 
 
+
+
 -(void)requestCurrent
 {
+    
     
     [[HttpAPI SharedCommonApi]requestGetMethodUrl:HTTP_Current withParas:nil   success:^(AFHTTPRequestOperation* operation, NSObject *resultObject) {
         
