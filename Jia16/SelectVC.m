@@ -102,13 +102,13 @@
         [[NSNotificationCenter defaultCenter]postNotificationName:@"openGesture" object:nil userInfo:dict];
         
     }
-    else
-    {
-     
-        [CookieHandler deleteCookie];
-        NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject: nil forKey:kCookie];
-    }
+//    else
+//    {
+//     
+//        [CookieHandler deleteCookie];
+//        NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+//        [defaults setObject: nil forKey:kCookie];
+//    }
 
     [self requestCurrent];
     
@@ -127,6 +127,14 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    
+    if([currentUrl hasSuffix:@"LoginVC"])//登录
+    {
+        NSArray *array = [currentUrl componentsSeparatedByString:@"?"];
+        refUrl=[NSURL URLWithString:array[0]];
+       [self.webView loadRequest:[NSURLRequest requestWithURL:refUrl]];
+    }
+
     
 
  [self.navigationController setNavigationBarHidden:YES];
@@ -577,6 +585,16 @@
             [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
             
 
+            NSMutableDictionary *cookieProperties1 = [NSMutableDictionary dictionary];
+            [cookieProperties1 setObject:@"versionNo" forKey:NSHTTPCookieName];
+            [cookieProperties1 setObject:versionNo forKey:NSHTTPCookieValue];
+            [cookieProperties1 setObject:baseIp forKey:NSHTTPCookieDomain];
+            [cookieProperties1 setObject:baseIp forKey:NSHTTPCookieOriginURL];
+            [cookieProperties1 setObject:@"/" forKey:NSHTTPCookiePath];
+            [cookieProperties1 setObject:@"0" forKey:NSHTTPCookieVersion];
+            
+            NSHTTPCookie *cookie1 = [NSHTTPCookie cookieWithProperties:cookieProperties1];
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie1];
             
             NSArray *cookies=[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
             for (int i=0; i<cookies.count;i++) {

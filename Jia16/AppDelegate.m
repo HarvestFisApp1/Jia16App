@@ -69,6 +69,19 @@
 
             
         };
+        
+        self.introductionView.didRegister=^(){
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            
+            weakSelf.window.rootViewController = storyboard.instantiateInitialViewController;
+            [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                NSString *url=[NSString stringWithFormat:@"%@/#!register",BaseH5];
+                NSDictionary *dict =[[NSDictionary alloc] initWithObjectsAndKeys:url,@"url", nil];
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"reloadUrl" object:nil userInfo:dict];
+            });
+   
+        };
 
     }
     [NSThread sleepForTimeInterval:3.0];//设置启动页面时间

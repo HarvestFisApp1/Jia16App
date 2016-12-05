@@ -64,4 +64,5 @@
 
 
 #define  kCookie    @"cookie"
+#define  versionNo  @"1.2"
 /*** standard style end ***/

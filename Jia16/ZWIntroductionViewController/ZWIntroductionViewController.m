@@ -46,23 +46,30 @@
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(mainWidth * i, 0, mainWidth, mainHeight)];
         imageView.image = [UIImage imageNamed:self.imageViews[i]];
         imageView.userInteractionEnabled = YES;
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(mainWidth -65, 25, 50, 50);
-        [button setImage:[UIImage imageNamed:@"icon_close"] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(closeLaunch) forControlEvents:UIControlEventTouchUpInside];
-        button.imageEdgeInsets=UIEdgeInsetsMake(0, 10, 10, 10);
-        
-        [imageView addSubview:button];
+//        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//        button.frame = CGRectMake(mainWidth -65, 25, 50, 50);
+//        [button setImage:[UIImage imageNamed:@"icon_close"] forState:UIControlStateNormal];
+//        [button addTarget:self action:@selector(closeLaunch) forControlEvents:UIControlEventTouchUpInside];
+//        button.imageEdgeInsets=UIEdgeInsetsMake(0, 10, 10, 10);
+//        
+//        [imageView addSubview:button];
         [self.scrollView addSubview:imageView];
         
         if (i == 3) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake(0, 0, mainWidth, mainHeight);
+            button.frame = CGRectMake(0, 0, mainWidth, mainHeight/2);
             button.clipsToBounds = YES;
             button.layer.cornerRadius = 4;
-            button.center = CGPointMake(mainWidth / 2, mainHeight - 80);
            [button addTarget:self action:@selector(closeLaunch) forControlEvents:UIControlEventTouchUpInside];
            [imageView addSubview:button];
+            
+            UIButton *button1 = [UIButton buttonWithType:UIButtonTypeCustom];
+            button1.frame = CGRectMake(0, mainHeight/2, mainWidth, mainHeight/2);
+            button1.clipsToBounds = YES;
+            button1.layer.cornerRadius = 4;
+            button1.center = CGPointMake(mainWidth / 2, mainHeight - 80);
+            [button1 addTarget:self action:@selector(goResiter) forControlEvents:UIControlEventTouchUpInside];
+            [imageView addSubview:button1];
         }
     }
 }
@@ -90,6 +97,13 @@
 {
     self.didSelectedEnter();
 }
+
+-(void)goResiter
+{
+       self.didRegister();
+
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

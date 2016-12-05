@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 typedef void (^DidSelectedEnter)();
+typedef void (^DidRegister)();
+
 
 @interface ZWIntroductionViewController : UIViewController
 
@@ -17,5 +19,5 @@ typedef void (^DidSelectedEnter)();
 @property (nonatomic, strong) UIButton *enterButton;
 
 @property (nonatomic, copy) DidSelectedEnter didSelectedEnter;
-
+@property (nonatomic, copy) DidRegister didRegister;
 @end
