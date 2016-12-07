@@ -31,15 +31,20 @@
         [self.view addSubview:self.scrollView];
     }
     
-//    if (!self.pageControl) {
-//        self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, 0, 80, 10)];
-//        self.pageControl.center = CGPointMake(mainWidth/2, mainHeight - 30);
-//        self.pageControl.currentPageIndicatorTintColor=Color_Macro(177, 214, 46, 1);
-//        self.pageControl.pageIndicatorTintColor=Color_Macro(65, 140, 159, 1);
-//        self.pageControl.numberOfPages = 3;
-//        [self.view addSubview:self.pageControl];
-//    }
-//    
+    if (!self.pageControl) {
+        self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, 0, 80, 10)];
+        self.pageControl.center = CGPointMake(mainWidth/2, mainHeight - 30);
+        self.pageControl.currentPageIndicatorTintColor=Color_Macro(255,255,255, 1);
+        self.pageControl.pageIndicatorTintColor=Color_Macro(255, 255, 255, 0.5);
+        self.pageControl.numberOfPages = 4;
+    
+
+        
+         [self.pageControl addTarget:self action:@selector(pageTurn:) forControlEvents:UIControlEventValueChanged];  //用户点击UIPageControl的响应函数
+
+        [self.view addSubview:self.pageControl];
+    }
+//
     self.imageViews = @[@"guide1",@"guide2",@"guide3",@"guide4"];
     
     for (NSInteger i = 0 ; i < self.imageViews.count; i++) {
@@ -90,6 +95,19 @@
 {
     self.pageControl.currentPage = scrollView.contentOffset.x / mainWidth;
 }
+
+
+- (void)pageTurn:(UIPageControl*)sender
+{
+
+    CGSize viewSize = self.scrollView.frame.size;
+    CGRect rect = CGRectMake(sender.currentPage * viewSize.width, 0, viewSize.width, viewSize.height);
+    [self.scrollView scrollRectToVisible:rect animated:YES];
+}
+
+
+
+
 
 #pragma mark - Action
 
