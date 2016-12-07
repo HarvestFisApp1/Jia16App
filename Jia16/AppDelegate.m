@@ -50,12 +50,20 @@
                                                        options:NSJSONWritingPrettyPrinted
                                                          error:nil];
     
-    NSLog(@"%@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
-    
     
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]){
         [application setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+        UIDevice *device = [UIDevice currentDevice];
+        [self umengEvent:@"uploadDevice" attributes:@{@"udid":device.identifierForVendor.UUIDString,@"version" :  device.systemVersion,@"device":device.model} number:@(10)];
         
+        
+        
+        NSLog(@"苹果设备唯一标识UUID: %@", device.identifierForVendor);
+        
+        NSLog(@"系统版本: %@", device.systemVersion);
+        
+        NSLog(@"设备型号: %@", device.model);
+
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
         self.introductionView = [[ZWIntroductionViewController alloc] init];
         self.window.rootViewController = self.introductionView;
@@ -91,6 +99,13 @@
     return YES;
 }
 
+
+-(void)umengEvent:(NSString *)eventId attributes:(NSDictionary *)attributes number:(NSNumber *)number{
+    NSString *numberKey = @"__ct__";
+    NSMutableDictionary *mutableDictionary = [NSMutableDictionary dictionaryWithDictionary:attributes];
+    [mutableDictionary setObject:[number stringValue] forKey:numberKey];
+    [MobClick event:eventId attributes:mutableDictionary];
+}
 
 
 -(void)checkVersion

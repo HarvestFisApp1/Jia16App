@@ -14,7 +14,7 @@
 #import "POPVIew.h"
 #import "GesturePasswordController.h"
 #import "KeychainItemWrapper.h"
-
+#import "UMMobClick/MobClick.h"
 @interface LoginVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,popViewDelegate>
 {
     UITextField *textFieldName;
@@ -294,7 +294,7 @@
             
             [self requestCurrent];
         
-            
+            [MobClick event:@"loginSuccess"];
         }
         else
         {
