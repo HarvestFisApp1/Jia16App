@@ -513,7 +513,16 @@
 }
 -(void)setCookie
 {
+    NSMutableDictionary *cookieProperties2 = [NSMutableDictionary dictionary];
+    [cookieProperties2 setObject:@"app_channel" forKey:NSHTTPCookieName];
+    [cookieProperties2 setObject:@"ios" forKey:NSHTTPCookieValue];
+    [cookieProperties2 setObject:baseIp forKey:NSHTTPCookieDomain];
+    [cookieProperties2 setObject:baseIp forKey:NSHTTPCookieOriginURL];
+    [cookieProperties2 setObject:@"/" forKey:NSHTTPCookiePath];
+    [cookieProperties2 setObject:@"0" forKey:NSHTTPCookieVersion];
     
+    NSHTTPCookie *cookie2 = [NSHTTPCookie cookieWithProperties:cookieProperties2];
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie2];
 
     NSData * cookiesData = [NSKeyedArchiver archivedDataWithRootObject: [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]];
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
@@ -595,6 +604,8 @@
             
             NSHTTPCookie *cookie1 = [NSHTTPCookie cookieWithProperties:cookieProperties1];
             [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie1];
+            
+
             
             NSArray *cookies=[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
             for (int i=0; i<cookies.count;i++) {
