@@ -37,7 +37,7 @@
     
   
     UMConfigInstance.appKey = @"583cf3484ad15622cf001f67";
-    UMConfigInstance.channelId = @"App Store";
+    UMConfigInstance.channelId = @"IOS";
     [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
     
     Class cls = NSClassFromString(@"UMANUtil");
