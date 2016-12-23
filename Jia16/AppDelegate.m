@@ -19,6 +19,8 @@
 #import "CXAlertView.h"
 
 #import "UMMobClick/MobClick.h"
+
+#import <UMSocialCore/UMSocialCore.h>
 @interface AppDelegate ()
 {
 
@@ -34,11 +36,26 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
     
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@"583cf3484ad15622cf001f67"];
+    
+
+    
+    //设置微信的appKey和appSecret
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxdc1e388c3822c80b" appSecret:@"3baf1193c85774b3fd9d18447d76cab0" redirectURL:@"http://mobile.umeng.com/social"];
+    
+    
+    //设置分享到QQ互联的appKey和appSecret
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"100424468"  appSecret:nil redirectURL:@"http://mobile.umeng.com/social"];
   
     UMConfigInstance.appKey = @"583cf3484ad15622cf001f67";
     UMConfigInstance.channelId = @"IOS";
     [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
+    
+    
     
     Class cls = NSClassFromString(@"UMANUtil");
     SEL deviceIDSelector = @selector(openUDIDString);
@@ -214,6 +231,8 @@
     NSDictionary *dict =[[NSDictionary alloc] initWithObjectsAndKeys:linkUrl,@"url",@"1",@"isAwake",nil];
     [[NSNotificationCenter defaultCenter]postNotificationName:@"reloadUrl" object:nil userInfo:dict];
      [[NSNotificationCenter defaultCenter]postNotificationName:@"closeLogin" object:nil userInfo:nil];
+    
+    
     return YES;
 
 }

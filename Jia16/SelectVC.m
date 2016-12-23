@@ -26,6 +26,8 @@
 
 #import "UIImage+GIF.h"
 #import "AppDelegate.h"
+#import "ShareView.h"
+#import <UShareUI/UShareUI.h>
 @interface SelectVC ()<UIWebViewDelegate,UIGestureRecognizerDelegate,NSURLConnectionDelegate>
 {
 
@@ -54,8 +56,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
 
+    
     self.webView.delegate=self;
     self.webView.scrollView.scrollEnabled=NO;
     isOnline=YES;
@@ -115,7 +117,18 @@
     
     
     [self reloadUrl:memNoti];
+    
+    
+    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine)]];
+    
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType,NSDictionary* userInfo){
+        
+        
+        
+    }];
 
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
