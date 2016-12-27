@@ -118,17 +118,9 @@
     
     [self reloadUrl:memNoti];
     
-    
-    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine)]];
-    
-    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType,NSDictionary* userInfo){
-        
-        
-        
-    }];
 
-    
-    
+
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -185,6 +177,7 @@
 - (UIView*)viewForZoomingInScrollView:(UIScrollView*)scrollView {
     
     return nil;
+    
     
 }
 
@@ -387,9 +380,6 @@
     return YES;
     
 }
-
-
-
 
 
 

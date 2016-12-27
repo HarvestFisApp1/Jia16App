@@ -41,7 +41,7 @@
 		3B2250801D5878B7002CE314 /* AboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B22507E1D5878B7002CE314 /* AboutVC.m */; };
 		3B2250811D5878B7002CE314 /* AboutVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B22507F1D5878B7002CE314 /* AboutVC.xib */; };
 		3B2844EF1E0A759F006C2EC9 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2844EE1E0A759F006C2EC9 /* ShareView.m */; };
-		3B2845061E0A770B006C2EC9 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2844F31E0A770B006C2EC9 /* libSocialQQ.a */; };
+		3B2845061E0A770B006C2EC9 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2844F31E0A770B006C2EC9 /* libSocialQQ.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		3B2845071E0A770B006C2EC9 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2844F41E0A770B006C2EC9 /* TencentOpenAPI.framework */; };
 		3B2845081E0A770B006C2EC9 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3B2844F51E0A770B006C2EC9 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		3B2845091E0A770B006C2EC9 /* libSocialWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2844F81E0A770B006C2EC9 /* libSocialWeChat.a */; };
@@ -72,6 +72,9 @@
 		3B2C45811DC1A74200EE7573 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C456C1DC1A74200EE7573 /* UIProgressView+AFNetworking.m */; };
 		3B2C45821DC1A74200EE7573 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C456E1DC1A74200EE7573 /* UIRefreshControl+AFNetworking.m */; };
 		3B2C45831DC1A74200EE7573 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C45701DC1A74200EE7573 /* UIWebView+AFNetworking.m */; };
+		3B3467EB1E11071D0098A3BA /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B3467EA1E11071D0098A3BA /* Social.framework */; };
+		3B3467ED1E1107320098A3BA /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B3467EC1E1107320098A3BA /* Accounts.framework */; };
+		3B3467EF1E110B420098A3BA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B3467EE1E110B420098A3BA /* SystemConfiguration.framework */; };
 		3B705BCB1D504F0C00C1EC8A /* CommonTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B705BCA1D504F0C00C1EC8A /* CommonTool.m */; };
 		3B7644FD1DED2D2100139D6D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7644FC1DED2D2100139D6D /* CoreTelephony.framework */; };
 		3B7644FF1DED2D3000139D6D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7644FE1DED2D3000139D6D /* libz.tbd */; };
@@ -263,6 +266,9 @@
 		3B2C456E1DC1A74200EE7573 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		3B2C456F1DC1A74200EE7573 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		3B2C45701DC1A74200EE7573 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		3B3467EA1E11071D0098A3BA /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		3B3467EC1E1107320098A3BA /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		3B3467EE1E110B420098A3BA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3B705BC91D504F0C00C1EC8A /* CommonTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonTool.h; sourceTree = "<group>"; };
 		3B705BCA1D504F0C00C1EC8A /* CommonTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonTool.m; sourceTree = "<group>"; };
 		3B7644FA1DED2D0A00139D6D /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMMobClick.framework; path = "../Downloads/umsdk_IOS_analyics_no-idfa_v4.1.5/UMMobClick.framework"; sourceTree = "<group>"; };
@@ -360,6 +366,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B3467EF1E110B420098A3BA /* SystemConfiguration.framework in Frameworks */,
+				3B3467ED1E1107320098A3BA /* Accounts.framework in Frameworks */,
+				3B3467EB1E11071D0098A3BA /* Social.framework in Frameworks */,
 				3B2845121E0A7773006C2EC9 /* libc++.tbd in Frameworks */,
 				3B7645041DED4E6300139D6D /* UMMobClick.framework in Frameworks */,
 				3B2845071E0A770B006C2EC9 /* TencentOpenAPI.framework in Frameworks */,
@@ -710,6 +719,9 @@
 		3B7644F91DED2D0900139D6D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3B3467EE1E110B420098A3BA /* SystemConfiguration.framework */,
+				3B3467EC1E1107320098A3BA /* Accounts.framework */,
+				3B3467EA1E11071D0098A3BA /* Social.framework */,
 				3B2845111E0A7773006C2EC9 /* libc++.tbd */,
 				3B7645031DED4E6300139D6D /* UMMobClick.framework */,
 				3BD626A21D52E593004337B8 /* UIKit.framework */,
@@ -1232,7 +1244,7 @@
 					"$(PROJECT_DIR)/Jia16/UMSocial/SocialLibraries/QQ",
 					"$(PROJECT_DIR)/Jia16/UMSocial/SocialLibraries/WeChat",
 				);
-				OTHER_LDFLAGS = "-objc";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.harvestcm.jiashiliu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1263,7 +1275,7 @@
 					"$(PROJECT_DIR)/Jia16/UMSocial/SocialLibraries/QQ",
 					"$(PROJECT_DIR)/Jia16/UMSocial/SocialLibraries/WeChat",
 				);
-				OTHER_LDFLAGS = "-objc";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.harvestcm.jiashiliu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

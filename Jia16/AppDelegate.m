@@ -45,11 +45,11 @@
 
     
     //设置微信的appKey和appSecret
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxdc1e388c3822c80b" appSecret:@"3baf1193c85774b3fd9d18447d76cab0" redirectURL:@"http://mobile.umeng.com/social"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wx7208eaaf0f57f34d" appSecret:@"08034277e141e640cadbc6e26842f96a" redirectURL:@"http://mobile.umeng.com/social"];
     
     
     //设置分享到QQ互联的appKey和appSecret
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"100424468"  appSecret:nil redirectURL:@"http://mobile.umeng.com/social"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1105662722"  appSecret:@"CeFHk1L2OFiYxsE5" redirectURL:@"http://mobile.umeng.com/social"];
   
     UMConfigInstance.appKey = @"583cf3484ad15622cf001f67";
     UMConfigInstance.channelId = @"IOS";
@@ -223,14 +223,17 @@
 {
    
     NSString *str=url.absoluteString;
-    NSArray *array = [str componentsSeparatedByString:@"jia16://"];
-    NSString *paramStr=array[1];
-    
-    NSString *linkUrl=[NSString stringWithFormat:@"%@%@",BaseH5,paramStr];
-    self.linkUrl=linkUrl;
-    NSDictionary *dict =[[NSDictionary alloc] initWithObjectsAndKeys:linkUrl,@"url",@"1",@"isAwake",nil];
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"reloadUrl" object:nil userInfo:dict];
-     [[NSNotificationCenter defaultCenter]postNotificationName:@"closeLogin" object:nil userInfo:nil];
+    if ([str rangeOfString:@"jia16://"].location!=NSNotFound) {
+        NSArray *array = [str componentsSeparatedByString:@"jia16://"];
+        NSString *paramStr=array[1];
+        
+        NSString *linkUrl=[NSString stringWithFormat:@"%@%@",BaseH5,paramStr];
+        self.linkUrl=linkUrl;
+        NSDictionary *dict =[[NSDictionary alloc] initWithObjectsAndKeys:linkUrl,@"url",@"1",@"isAwake",nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"reloadUrl" object:nil userInfo:dict];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"closeLogin" object:nil userInfo:nil];
+    }
+
     
     
     return YES;
