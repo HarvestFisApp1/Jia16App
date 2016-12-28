@@ -119,7 +119,7 @@
     [self reloadUrl:memNoti];
     
 
-
+    
 
 }
 
@@ -190,7 +190,7 @@
     NSString *requestStr=request.URL.absoluteString ;
     currentUrl=requestStr;
  
-    
+    requestStr = [requestStr stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
   if([requestStr hasSuffix:@"GesturePasswordSetup"])//设置手势
   {
@@ -366,6 +366,88 @@
         
         return NO;
     }
+    
+    
+    
+    if([requestStr rangeOfString:@"?shareNative"].location!=NSNotFound)//分享
+    {
+        //设置用户自定义的平台
+        [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),
+                                                   
+                                                   @(UMSocialPlatformType_QQ),
+                                                   ]];
+        
+        NSString *str=requestStr;
+        NSArray *array = [str componentsSeparatedByString:@"?"];
+        NSString *paramStr=array[1];
+        NSArray *paramArry=[paramStr componentsSeparatedByString:@"&"];
+        NSString *title=[paramArry[1] componentsSeparatedByString:@"="][1];
+        title=[title stringByReplacingOccurrencesOfString:@"'" withString:@""];
+        NSString *imageUrl=[paramArry[2] componentsSeparatedByString:@"="][1];
+        imageUrl=[NSString stringWithFormat:@"%@/%@",BaseH5,imageUrl];
+       __block  NSData *data;
+       __block UIImage *image;
+        dispatch_queue_t concurrentQueue = dispatch_queue_create("my.concurrent.queue", DISPATCH_QUEUE_CONCURRENT);
+
+        dispatch_async(concurrentQueue, ^(){
+        
+            data=[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]];
+            image=[UIImage imageWithData:data];
+        });
+
+        
+        
+        NSString *text=[paramArry[3] componentsSeparatedByString:@"="][1];
+
+        NSString *url=[paramArry[4] componentsSeparatedByString:@"="][1];
+        url=[NSString stringWithFormat:@"%@%@",BaseH5,url];
+        [UMSocialUIManager addCustomPlatformWithoutFilted:UMSocialPlatformType_UserDefine_Begin+2
+                                         withPlatformIcon:[UIImage imageNamed:@"umsocial_default"]
+                                         withPlatformName:@"复制链接"];
+        
+        [UMSocialShareUIConfig shareInstance].sharePageGroupViewConfig.sharePageGroupViewPostionType = UMSocialSharePageGroupViewPositionType_Bottom;
+        [UMSocialShareUIConfig shareInstance].sharePageScrollViewConfig.shareScrollViewPageItemStyleType = UMSocialPlatformItemViewBackgroudType_None;
+        [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+            //在回调里面获得点击的
+            if (platformType == UMSocialPlatformType_UserDefine_Begin+2) {
+              
+                UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+                pasteboard.string = url;
+                
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:@"已复制链接" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil];
+                [alert show];
+            }
+            else
+            {
+                
+                
+                //创建分享消息对象
+                UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+                
+                //创建网页内容对象
+                UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:title descr:text thumImage:image];
+                //设置网页地址
+                shareObject.webpageUrl =url;
+                
+                //分享消息对象设置分享内容对象
+                messageObject.shareObject = shareObject;
+                
+                
+                [self shareWebPageToPlatformType:platformType msgObj:messageObject];
+            }
+            
+        }];
+        
+   
+        
+        
+        
+        return NO;
+        
+    }
+    
+    
+
 
 
     return YES;
@@ -777,4 +859,19 @@
     
     
 }
+
+- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType msgObj:(UMSocialMessageObject*)MsgObj
+{
+ 
+    
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:MsgObj currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            NSLog(@"************Share fail with error %@*********",error);
+        }else{
+            NSLog(@"response data is %@",data);
+        }
+    }];
+}
+
 @end

@@ -35,11 +35,7 @@
     [self initNav];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(close) name:@"closeLogin" object:nil];
     
-    //设置用户自定义的平台
-    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),
-                                               
-                                               @(UMSocialPlatformType_QQ),
-                                               ]];
+
     
    
 }
@@ -108,59 +104,18 @@
 
 -(void)findPWdClick
 {
-//    NSString *url=[NSString stringWithFormat:@"%@/#!findloginpwd",BaseH5];
-//
-//        NSDictionary *dict =[[NSDictionary alloc] initWithObjectsAndKeys:url,@"url", nil];
-//        
-//           [[NSNotificationCenter defaultCenter]postNotificationName:@"reloadUrl" object:nil userInfo:dict];
-//    
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self.navigationController popViewControllerAnimated:NO];
-//    });
-    [UMSocialUIManager addCustomPlatformWithoutFilted:UMSocialPlatformType_UserDefine_Begin+2
-                                     withPlatformIcon:[UIImage imageNamed:@"icon_circle"]
-                                     withPlatformName:@"复制链接"];
+    NSString *url=[NSString stringWithFormat:@"%@/#!findloginpwd",BaseH5];
+
+        NSDictionary *dict =[[NSDictionary alloc] initWithObjectsAndKeys:url,@"url", nil];
+        
+           [[NSNotificationCenter defaultCenter]postNotificationName:@"reloadUrl" object:nil userInfo:dict];
     
-    [UMSocialShareUIConfig shareInstance].sharePageGroupViewConfig.sharePageGroupViewPostionType = UMSocialSharePageGroupViewPositionType_Bottom;
-    [UMSocialShareUIConfig shareInstance].sharePageScrollViewConfig.shareScrollViewPageItemStyleType = UMSocialPlatformItemViewBackgroudType_None;
-    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-        //在回调里面获得点击的
-        if (platformType == UMSocialPlatformType_UserDefine_Begin+2) {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.navigationController popViewControllerAnimated:NO];
+    });
   
-        }
-        else
-        {
-        
-            [self shareWebPageToPlatformType:platformType];
-        }
-        
-    }];
-
-
 }
 
-- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
-{
-    //创建分享消息对象
-    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    
-    //创建网页内容对象
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"嘉石榴" descr:@"2017即将到来，“嘉石榴”为您准备了与亲友同享活动奖励的机会，衷心希望各位同事给予支持！" thumImage:[UIImage imageNamed:@"guide1"]];
-    //设置网页地址
-    shareObject.webpageUrl =@"https://app.jia16.com";
-    
-    //分享消息对象设置分享内容对象
-    messageObject.shareObject = shareObject;
-    
-    //调用分享接口
-    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-        if (error) {
-            NSLog(@"************Share fail with error %@*********",error);
-        }else{
-            NSLog(@"response data is %@",data);
-        }
-    }];
-}
 
 
 -(void)close
