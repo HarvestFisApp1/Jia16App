@@ -56,7 +56,7 @@
     [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
     
     
-    
+
     Class cls = NSClassFromString(@"UMANUtil");
     SEL deviceIDSelector = @selector(openUDIDString);
     NSString *deviceID = nil;
@@ -65,7 +65,7 @@
     }
     NSData* jsonData = [NSJSONSerialization dataWithJSONObject:@{@"oid" : deviceID}
                                                        options:NSJSONWritingPrettyPrinted
-                                                         error:nil];
+                                                        error:nil];
     
     
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]){
@@ -107,6 +107,8 @@
             });
    
         };
+        
+        
 
     }
     [NSThread sleepForTimeInterval:3.0];//设置启动页面时间

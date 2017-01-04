@@ -198,7 +198,7 @@ static BOOL __cx_statsu_prefersStatusBarHidden;
     _containerWidth = kDefaultContainerWidth;
 
     UILabel *messageLabel = [[UILabel alloc] init];
-    messageLabel.textAlignment = NSTextAlignmentLeft;
+    messageLabel.textAlignment = NSTextAlignmentCenter;
     messageLabel.backgroundColor = [UIColor clearColor];
     messageLabel.font = [UIFont systemFontOfSize:14.0];
     messageLabel.textColor = [UIColor blackColor];

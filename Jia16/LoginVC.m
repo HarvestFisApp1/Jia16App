@@ -35,8 +35,6 @@
     [self initNav];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(close) name:@"closeLogin" object:nil];
     
-
-    
    
 }
 
@@ -318,9 +316,6 @@
     
         NSDictionary *dic=(NSDictionary*)operation.responseObject;
         NSString *msg=[NSString stringWithFormat:@"%@",dic[@"message"]];
-        
-        
-        
         [CommonTool showAlertWithMsg:msg];
     
     

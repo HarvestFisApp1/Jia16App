@@ -40,7 +40,6 @@
 		3B18AB351D59DBD000C2AF01 /* CookieHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B18AB341D59DBD000C2AF01 /* CookieHandler.m */; };
 		3B2250801D5878B7002CE314 /* AboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B22507E1D5878B7002CE314 /* AboutVC.m */; };
 		3B2250811D5878B7002CE314 /* AboutVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B22507F1D5878B7002CE314 /* AboutVC.xib */; };
-		3B2844EF1E0A759F006C2EC9 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2844EE1E0A759F006C2EC9 /* ShareView.m */; };
 		3B2845061E0A770B006C2EC9 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2844F31E0A770B006C2EC9 /* libSocialQQ.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		3B2845071E0A770B006C2EC9 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2844F41E0A770B006C2EC9 /* TencentOpenAPI.framework */; };
 		3B2845081E0A770B006C2EC9 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3B2844F51E0A770B006C2EC9 /* TencentOpenApi_IOS_Bundle.bundle */; };
@@ -208,8 +207,6 @@
 		3B22507D1D5878B7002CE314 /* AboutVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutVC.h; sourceTree = "<group>"; };
 		3B22507E1D5878B7002CE314 /* AboutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutVC.m; sourceTree = "<group>"; };
 		3B22507F1D5878B7002CE314 /* AboutVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutVC.xib; sourceTree = "<group>"; };
-		3B2844ED1E0A759F006C2EC9 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
-		3B2844EE1E0A759F006C2EC9 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
 		3B2844F31E0A770B006C2EC9 /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
 		3B2844F41E0A770B006C2EC9 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		3B2844F51E0A770B006C2EC9 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
@@ -552,8 +549,6 @@
 				3B22507F1D5878B7002CE314 /* AboutVC.xib */,
 				3B7BA82E1D911A8000D658E8 /* InvestDetailVC.h */,
 				3B7BA82F1D911A8000D658E8 /* InvestDetailVC.m */,
-				3B2844ED1E0A759F006C2EC9 /* ShareView.h */,
-				3B2844EE1E0A759F006C2EC9 /* ShareView.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1030,7 +1025,6 @@
 				3BD8196E1D518305004DCB8B /* View+MASAdditions.m in Sources */,
 				3B08DBD91D9280AA009CEB26 /* UIImage+GIF.m in Sources */,
 				3BD819691D518305004DCB8B /* MASLayoutConstraint.m in Sources */,
-				3B2844EF1E0A759F006C2EC9 /* ShareView.m in Sources */,
 				3BD626B21D532435004337B8 /* POPVIew.m in Sources */,
 				3B2C45801DC1A74200EE7573 /* UIImageView+AFNetworking.m in Sources */,
 				3BD819671D518305004DCB8B /* MASConstraint.m in Sources */,

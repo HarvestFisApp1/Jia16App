@@ -43,8 +43,7 @@
     
     BOOL isLoading;
     
-    
-    
+
     NSString *linkUrl;
 }
 
@@ -598,6 +597,19 @@
 }
 -(void)setCookie
 {
+    
+    NSMutableDictionary *cookieProperties1 = [NSMutableDictionary dictionary];
+    [cookieProperties1 setObject:@"versionNo" forKey:NSHTTPCookieName];
+    NSString *verNo=[[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+    [cookieProperties1 setObject:verNo forKey:NSHTTPCookieValue];
+    [cookieProperties1 setObject:baseIp forKey:NSHTTPCookieDomain];
+    [cookieProperties1 setObject:baseIp forKey:NSHTTPCookieOriginURL];
+    [cookieProperties1 setObject:@"/" forKey:NSHTTPCookiePath];
+    [cookieProperties1 setObject:@"0" forKey:NSHTTPCookieVersion];
+    
+    NSHTTPCookie *cookie1 = [NSHTTPCookie cookieWithProperties:cookieProperties1];
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie1];
+    
     NSMutableDictionary *cookieProperties2 = [NSMutableDictionary dictionary];
     [cookieProperties2 setObject:@"app_channel" forKey:NSHTTPCookieName];
     [cookieProperties2 setObject:@"ios" forKey:NSHTTPCookieValue];
@@ -679,16 +691,7 @@
             [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
             
 
-            NSMutableDictionary *cookieProperties1 = [NSMutableDictionary dictionary];
-            [cookieProperties1 setObject:@"versionNo" forKey:NSHTTPCookieName];
-            [cookieProperties1 setObject:versionNo forKey:NSHTTPCookieValue];
-            [cookieProperties1 setObject:baseIp forKey:NSHTTPCookieDomain];
-            [cookieProperties1 setObject:baseIp forKey:NSHTTPCookieOriginURL];
-            [cookieProperties1 setObject:@"/" forKey:NSHTTPCookiePath];
-            [cookieProperties1 setObject:@"0" forKey:NSHTTPCookieVersion];
-            
-            NSHTTPCookie *cookie1 = [NSHTTPCookie cookieWithProperties:cookieProperties1];
-            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie1];
+          
             
 
             
