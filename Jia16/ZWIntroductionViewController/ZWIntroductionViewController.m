@@ -9,7 +9,11 @@
 #import "ZWIntroductionViewController.h"
 
 @interface ZWIntroductionViewController () <UIScrollViewDelegate>
+{
+    UIButton  *btn1;
+    UIButton *btn2;
 
+}
 @property (nonatomic, strong) NSArray *imageViews;
 
 @property (nonatomic, assign) NSInteger centerPageIndex;
@@ -34,8 +38,8 @@
     if (!self.pageControl) {
         self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, 0, 80, 10)];
         self.pageControl.center = CGPointMake(mainWidth/2, mainHeight - 30);
-        self.pageControl.currentPageIndicatorTintColor=Color_Macro(255,255,255, 1);
-        self.pageControl.pageIndicatorTintColor=Color_Macro(255, 255, 255, 0.5);
+        self.pageControl.currentPageIndicatorTintColor=Color_Macro(227,129,15, 1);
+        self.pageControl.pageIndicatorTintColor=Color_Macro(255, 225, 196, 1);
         self.pageControl.numberOfPages = 4;
     
 
@@ -58,6 +62,9 @@
 //        button.imageEdgeInsets=UIEdgeInsetsMake(0, 10, 10, 10);
 //        
 //        [imageView addSubview:button];
+        
+        
+        
         [self.scrollView addSubview:imageView];
         
         if (i == 3) {
@@ -68,15 +75,46 @@
            [button addTarget:self action:@selector(closeLaunch) forControlEvents:UIControlEventTouchUpInside];
            [imageView addSubview:button];
             
-            UIButton *button1 = [UIButton buttonWithType:UIButtonTypeCustom];
-            button1.frame = CGRectMake(0, mainHeight/2, mainWidth, mainHeight/2);
-            button1.clipsToBounds = YES;
-            button1.layer.cornerRadius = 4;
-            button1.center = CGPointMake(mainWidth / 2, mainHeight - 80);
-            [button1 addTarget:self action:@selector(goResiter) forControlEvents:UIControlEventTouchUpInside];
-            [imageView addSubview:button1];
+//            UIButton *button1 = [UIButton buttonWithType:UIButtonTypeCustom];
+//            button1.frame = CGRectMake(0, mainHeight/2, mainWidth, mainHeight/2);
+//            button1.clipsToBounds = YES;
+//            button1.layer.cornerRadius = 4;
+//            button1.center = CGPointMake(mainWidth / 2, mainHeight - 80);
+//            [button1 addTarget:self action:@selector(goResiter) forControlEvents:UIControlEventTouchUpInside];
+//            [imageView addSubview:button1];
         }
     }
+    
+    btn1=[UIButton buttonWithType:UIButtonTypeCustom];
+    btn1.frame=CGRectMake(110,mainHeight*3.05/4, 200, 44);
+    btn1.center=CGPointMake(self.view.center.x, btn1.center.y);
+    btn1.layer.borderWidth=0.5;
+    btn1.layer.borderColor=Color_Macro(192,88,122,1).CGColor;
+    btn1.layer.cornerRadius=5;
+    btn1.layer.masksToBounds=YES;
+    btn1.backgroundColor=[UIColor whiteColor];
+    [btn1 setTitle:@"注册领680元" forState:UIControlStateNormal];
+    [btn1.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14]];
+    [btn1 setTitleColor:Color_Macro(192,88,122,1) forState:UIControlStateNormal];
+    btn1.hidden=YES;
+    [btn1 addTarget:self action:@selector(goResiter) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn1];
+    
+    
+    btn2=[UIButton buttonWithType:UIButtonTypeCustom];
+    btn2.frame=CGRectMake(110,CGRectGetMaxY(btn1.frame)+5, 200, 44);
+    btn2.center=CGPointMake(self.view.center.x, btn2.center.y);
+    btn2.hidden=YES;
+    btn2.layer.cornerRadius=5;
+    btn2.layer.masksToBounds=YES;
+    btn2.layer.borderWidth=0.5;
+    btn2.layer.borderColor=Color_Macro(91,150,137,1).CGColor;
+    btn2.backgroundColor=[UIColor whiteColor];
+      [btn2.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14]];
+    [btn2 setTitle:@"直接进入" forState:UIControlStateNormal];
+    [btn2 setTitleColor:Color_Macro(91,150,137,1) forState:UIControlStateNormal];
+    [btn2 addTarget:self action:@selector(closeLaunch) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn2];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -94,7 +132,21 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     self.pageControl.currentPage = scrollView.contentOffset.x / mainWidth;
+    if(self.pageControl.currentPage==3)
+    {
+    
+        btn1.hidden=NO;
+        btn2.hidden=NO;
+    
+    }
+    else
+    {
+        btn1.hidden=YES;
+        btn2.hidden=YES;
+    
+    }
 }
+
 
 
 - (void)pageTurn:(UIPageControl*)sender
@@ -103,6 +155,7 @@
     CGSize viewSize = self.scrollView.frame.size;
     CGRect rect = CGRectMake(sender.currentPage * viewSize.width, 0, viewSize.width, viewSize.height);
     [self.scrollView scrollRectToVisible:rect animated:YES];
+    
 }
 
 

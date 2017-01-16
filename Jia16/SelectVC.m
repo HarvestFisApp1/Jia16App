@@ -136,6 +136,7 @@
     {
         NSArray *array = [currentUrl componentsSeparatedByString:@"?"];
         refUrl=[NSURL URLWithString:array[0]];
+       NSArray * cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
        [self.webView loadRequest:[NSURLRequest requestWithURL:refUrl]];
     }
 
@@ -398,7 +399,7 @@
         
         NSString *text=[paramArry[3] componentsSeparatedByString:@"="][1];
 
-        NSString *url=[paramArry[4] componentsSeparatedByString:@"="][1];
+        NSString *url=[str componentsSeparatedByString:@"&url="][1];
         url=[NSString stringWithFormat:@"%@%@",BaseH5,url];
         [UMSocialUIManager addCustomPlatformWithoutFilted:UMSocialPlatformType_UserDefine_Begin+2
                                          withPlatformIcon:[UIImage imageNamed:@"umsocial_default"]

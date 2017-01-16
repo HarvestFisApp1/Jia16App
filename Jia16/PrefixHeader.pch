@@ -43,7 +43,7 @@
 #define mainWidth       [[UIScreen mainScreen] bounds].size.width
 
 //=========================================H5=======================================
-#define baseIp      @"app.jia16.com"
+#define baseIp      @"testapp.jia16.com"
 //#define baseIp    @"192.168.1.109" //@"114.55.158.118"
 //#define baseIp      @"192.168.8.58:9090"
 #define BaseH5 [NSString stringWithFormat:@"http://%@", baseIp]

@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "welcome4.png",
+      "filename" : "第四屏无按钮.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "welcome4-1.png",
+      "filename" : "第四屏无按钮-1.png",
       "scale" : "2x"
     },
     {
