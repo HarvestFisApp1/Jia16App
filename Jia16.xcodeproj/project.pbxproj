@@ -921,7 +921,7 @@
 				TargetAttributes = {
 					3B0D076A1D4AF012002DCFC0 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 267S7248RE;
+						DevelopmentTeam = 74YPS92A5B;
 					};
 					3B0D07861D4AF012002DCFC0 = {
 						CreatedOnToolsVersion = 7.3;
@@ -1221,6 +1221,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 74YPS92A5B;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../",
 					"$(PROJECT_DIR)/Jia16",
@@ -1239,7 +1240,7 @@
 					"$(PROJECT_DIR)/Jia16/UMSocial/SocialLibraries/WeChat",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.harvestcm.jiashiliu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zalljinfu.jia16;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1252,6 +1253,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 74YPS92A5B;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../",
 					"$(PROJECT_DIR)/Jia16",
@@ -1270,7 +1272,7 @@
 					"$(PROJECT_DIR)/Jia16/UMSocial/SocialLibraries/WeChat",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.harvestcm.jiashiliu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zalljinfu.jia16;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

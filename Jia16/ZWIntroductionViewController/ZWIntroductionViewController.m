@@ -85,34 +85,37 @@
         }
     }
     
+    float i=[UIScreen mainScreen].bounds.size.width/320;
+    
+    
     btn1=[UIButton buttonWithType:UIButtonTypeCustom];
-    btn1.frame=CGRectMake(110,mainHeight*3.05/4, 200, 44);
+    btn1.frame=CGRectMake(110,mainHeight*3.05/4, 200*i, 44);
     btn1.center=CGPointMake(self.view.center.x, btn1.center.y);
     btn1.layer.borderWidth=0.5;
-    btn1.layer.borderColor=Color_Macro(192,88,122,1).CGColor;
+    btn1.layer.borderColor=Color_Macro(255,8,8,1).CGColor;
     btn1.layer.cornerRadius=5;
     btn1.layer.masksToBounds=YES;
     btn1.backgroundColor=[UIColor whiteColor];
-    [btn1 setTitle:@"注册领680元" forState:UIControlStateNormal];
-    [btn1.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14]];
-    [btn1 setTitleColor:Color_Macro(192,88,122,1) forState:UIControlStateNormal];
+    [btn1 setTitle:@"注册领取福利" forState:UIControlStateNormal];
+    [btn1.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:16]];
+    [btn1 setTitleColor:Color_Macro(255,8,8,1) forState:UIControlStateNormal];
     btn1.hidden=YES;
     [btn1 addTarget:self action:@selector(goResiter) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn1];
     
     
     btn2=[UIButton buttonWithType:UIButtonTypeCustom];
-    btn2.frame=CGRectMake(110,CGRectGetMaxY(btn1.frame)+5, 200, 44);
+    btn2.frame=CGRectMake(110,CGRectGetMaxY(btn1.frame)+10, 200*i, 44);
     btn2.center=CGPointMake(self.view.center.x, btn2.center.y);
     btn2.hidden=YES;
     btn2.layer.cornerRadius=5;
     btn2.layer.masksToBounds=YES;
     btn2.layer.borderWidth=0.5;
-    btn2.layer.borderColor=Color_Macro(91,150,137,1).CGColor;
+    btn2.layer.borderColor=Color_Macro(9,173,140,1).CGColor;
     btn2.backgroundColor=[UIColor whiteColor];
-      [btn2.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14]];
+      [btn2.titleLabel setFont:[UIFont systemFontOfSize:16]];
     [btn2 setTitle:@"直接进入" forState:UIControlStateNormal];
-    [btn2 setTitleColor:Color_Macro(91,150,137,1) forState:UIControlStateNormal];
+    [btn2 setTitleColor:Color_Macro(9,173,140,1) forState:UIControlStateNormal];
     [btn2 addTarget:self action:@selector(closeLaunch) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn2];
 }

@@ -227,10 +227,6 @@
 
 
 
-
-
-
-
 #pragma mark tap
 
 -(void)tapClick

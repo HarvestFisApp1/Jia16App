@@ -136,7 +136,7 @@
     {
         NSArray *array = [currentUrl componentsSeparatedByString:@"?"];
         refUrl=[NSURL URLWithString:array[0]];
-       NSArray * cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+//       NSArray * cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
        [self.webView loadRequest:[NSURLRequest requestWithURL:refUrl]];
     }
 
